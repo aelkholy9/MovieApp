@@ -29,13 +29,19 @@ class RoundedTextField extends StatelessWidget {
       children: [
         Container(
           width: Get.width * 0.85,
-          height: 60,
+          height: 70,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-          child: TextField(
+          child: TextFormField(
             controller: controller,
             cursorColor: AppColors.primaryColor,
             keyboardType: keyboardType,
             obscureText: obscureText,
+            validator: (value) {
+              if (validator != null) {
+                return validator!(value);
+              }
+              return null;
+            },
             decoration: InputDecoration(
               prefixIcon: prefixIcon != null
                   ? Icon(

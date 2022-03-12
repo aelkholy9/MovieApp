@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_app/business_logic/controllers/login_controller.dart';
 import 'package:movie_app/presentation/common_widgets/rounded_button.dart';
 import 'package:movie_app/presentation/common_widgets/rounded_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-
-  final TextEditingController userNameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,25 +31,39 @@ class LoginScreen extends StatelessWidget {
 }
 
 Widget loginForm() {
-  return Column(
-    children: [
-      RoundedTextField(
-        label: 'User name',
-        prefixIcon: Icons.account_circle_rounded,
-        hintTitle: 'User name',
-      ),
-      const SizedBox(height: 15),
-      RoundedTextField(
-        label: 'Password',
-        prefixIcon: Icons.password,
-        hintTitle: 'Password',
-        obscureText: true,
-      ),
-      const SizedBox(height: 15),
-      RoundedButton(
-        onPressed: () {},
-        title: "Login",
-      ),
-    ],
+  Get.find();
+  return GetBuilder<LoginController>(
+    builder: ((controller) {
+      return Form(
+        key: controller.formKey,
+        child: Column(
+          children: [
+            RoundedTextField(
+              label: 'User name',
+              prefixIcon: Icons.account_circle_rounded,
+              hintTitle: 'User name',
+              validator: (userName) => controller.validateUserName(userName),
+            ),
+            const SizedBox(height: 5),
+            RoundedTextField(
+              label: 'Password',
+              prefixIcon: Icons.password,
+              hintTitle: 'Password',
+              obscureText: true,
+              validator: (pass) => controller.validatePassword(pass),
+            ),
+            const SizedBox(height: 10),
+            RoundedButton(
+              onPressed: () => controller.login(),
+              title: "Login",
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text('Continue Anonymously?'),
+            )
+          ],
+        ),
+      );
+    }),
   );
 }

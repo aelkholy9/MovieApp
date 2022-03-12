@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/presentation/login_screen/login_screen.dart';
+import 'package:movie_app/utils/app_binding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Movie App',
       home: LoginScreen(),
+      initialBinding: AppBinding(),
     );
   }
 }
