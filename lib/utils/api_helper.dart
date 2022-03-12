@@ -47,13 +47,14 @@ class ApiHelper {
   //   }
   // }
 
-  Future<Response?> post(String url, Map<String, dynamic> body) async {
+  Future<Response?> post(String url, Map<String, dynamic> body,
+      [queryParameter = const {'api_key': ApiConstants.apiKey}]) async {
     Response? response;
     print(body);
     try {
       response = await dio.post(
         url,
-        queryParameters: {'api_key': ApiConstants.apiKey},
+        queryParameters: queryParameter,
         data: jsonEncode(body),
       );
       log("request Token: ${response.data}");

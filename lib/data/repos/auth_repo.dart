@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:get/get.dart';
 import 'package:movie_app/constants/api.dart';
 import 'package:movie_app/data/services/auth_service.dart';
 import 'package:movie_app/utils/storage.dart';
@@ -46,7 +45,6 @@ class AuthenticationRepo {
   Future<Map<String, dynamic>?> getUserBySessionId() async {
     log("**** geting user by session id repo");
     final sessionId = await LocalStorage.get(ApiParameters.sessionId);
-    print(sessionId);
     if (sessionId.isNotEmpty) {
       final dataMap = await _authenticationService.getUserBySession(sessionId);
       return dataMap?.data;

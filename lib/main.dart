@@ -1,16 +1,13 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:movie_app/business_logic/controllers/login_controller.dart';
-import 'package:movie_app/constants/api.dart';
 import 'package:movie_app/presentation/common_widgets/loading_dialog.dart';
 import 'package:movie_app/presentation/login_screen/login_screen.dart';
 import 'package:movie_app/presentation/now_playing_screen/now_playing.dart';
+import 'package:movie_app/presentation/watch_list/watch_list_screen.dart';
 import 'package:movie_app/utils/app_binding.dart';
-import 'package:movie_app/utils/storage.dart';
-
 import 'constants/screens_names.dart';
 
 void main() {
@@ -40,6 +37,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: Screens.nowPlayingScreen,
           page: () => const NowPlayingScreen(),
+        ),
+        GetPage(
+          name: Screens.watchListScreen,
+          page: () => const WatchListScreen(),
         ),
       ],
       initialBinding: AppBinding(),

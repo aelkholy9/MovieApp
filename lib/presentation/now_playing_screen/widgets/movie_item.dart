@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/business_logic/controllers/login_controller.dart';
+import 'package:movie_app/business_logic/controllers/watch_list_controller.dart';
 import 'package:movie_app/constants/api.dart';
+import 'package:movie_app/presentation/common_widgets/loading_dialog.dart';
 
 import '../../../data/models/Movie.dart';
 
@@ -9,6 +11,7 @@ class MovieItem extends StatelessWidget {
   final Movie movie;
   MovieItem({Key? key, required this.movie}) : super(key: key);
   final LoginController _loginController = Get.find();
+  final WatchListController _watchListController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,14 +24,28 @@ class MovieItem extends StatelessWidget {
           child: _loginController.userExists()
               ? Row(
                   children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.add_box,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      onPressed: () {},
-                    ),
+                    !_watchListController.watchList.contains(movie)
+                        ? IconButton(
+                            icon: const Icon(
+                              Icons.add_box,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                            onPressed: () async {
+                              Get.dialog(const LoadingDialog(
+                                  dialogText: 'Adding movie'));
+                              final success = await _watchListController
+                                  .addMovieToWatchList(movie: movie);
+                              Get.back();
+                              if (success) {
+                                Get.snackbar("Success", "Movie added to list",
+                                    colorText: Colors.white);
+                              } else {
+                                Get.snackbar("failure", "Movie not added");
+                              }
+                            },
+                          )
+                        : Container(),
                   ],
                 )
               : Container(),

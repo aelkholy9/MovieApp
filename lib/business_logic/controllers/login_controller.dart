@@ -61,4 +61,6 @@ class LoginController extends GetxController {
   bool userExists() {
     return _currentUser != null;
   }
+
+  User? get getUser => _currentUser;
 }

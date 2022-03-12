@@ -1,31 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_app/business_logic/controllers/now_playing_controller.dart';
+import 'package:movie_app/business_logic/controllers/watch_list_controller.dart';
 import 'package:movie_app/constants/colors.dart';
 import 'package:movie_app/presentation/now_playing_screen/widgets/movie_item.dart';
 
-import '../../constants/screens_names.dart';
-
-class NowPlayingScreen extends StatelessWidget {
-  const NowPlayingScreen({Key? key}) : super(key: key);
+class WatchListScreen extends StatelessWidget {
+  const WatchListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Now playing"),
+        title: const Text("My Watch List"),
         backgroundColor: AppColors.primaryColor,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.toNamed(Screens.watchListScreen);
-            },
-            icon: const Icon(
-              Icons.lock_clock,
-              color: Colors.white,
-            ),
-          )
-        ],
       ),
       body: moviesGrid(),
     );
@@ -33,7 +20,7 @@ class NowPlayingScreen extends StatelessWidget {
 }
 
 Widget moviesGrid() {
-  return GetBuilder<NowPlayingController>(
+  return GetBuilder<WatchListController>(
     builder: (controller) {
       return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -43,9 +30,9 @@ Widget moviesGrid() {
           mainAxisSpacing: 1,
         ),
         itemBuilder: (context, index) {
-          return MovieItem(movie: controller.movies[index]);
+          return MovieItem(movie: controller.watchList[index]);
         },
-        itemCount: controller.movies.length,
+        itemCount: controller.watchList.length,
       );
     },
   );

@@ -11,6 +11,13 @@ class ApiConstants {
   static const String nowPlayingMoviesUrl = 'movie/now_playing';
 
   static const String getUserBySessionUrl = 'account';
+  static String getWatchListUrl(int userId) {
+    return getUserBySessionUrl + '/$userId/' + '/watchlist/movies';
+  }
+
+  static String addToWatchListUrl(int userId) {
+    return getUserBySessionUrl + '/$userId/' + '/watchlist';
+  }
 
   static Map<String, dynamic> constructParametersWithPageNumber(
       int pageNumber) {
