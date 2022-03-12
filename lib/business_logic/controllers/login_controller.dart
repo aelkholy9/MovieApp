@@ -9,7 +9,7 @@ class LoginController extends GetxController {
   late TextEditingController passwordController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final AuthenticationRepo authenticationRepo = AuthenticationRepo();
-  User? currentUser;
+  User? _currentUser;
 
   @override
   void onInit() async {
@@ -52,9 +52,13 @@ class LoginController extends GetxController {
   Future<User?> getUserBySession() async {
     final userDataMap = await authenticationRepo.getUserBySessionId();
     if (userDataMap != null) {
-      currentUser = User.fromJson(userDataMap);
+      _currentUser = User.fromJson(userDataMap);
       update();
     }
     return null;
+  }
+
+  bool userExists() {
+    return _currentUser != null;
   }
 }

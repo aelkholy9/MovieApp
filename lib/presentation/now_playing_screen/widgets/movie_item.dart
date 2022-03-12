@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movie_app/business_logic/controllers/login_controller.dart';
 import 'package:movie_app/constants/api.dart';
 
 import '../../../data/models/Movie.dart';
 
 class MovieItem extends StatelessWidget {
   final Movie movie;
-  const MovieItem({Key? key, required this.movie}) : super(key: key);
-
+  MovieItem({Key? key, required this.movie}) : super(key: key);
+  final LoginController _loginController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,6 +16,23 @@ class MovieItem extends StatelessWidget {
       height: double.infinity,
       color: Colors.white,
       child: GridTile(
+        header: Container(
+          height: 30,
+          child: _loginController.userExists()
+              ? Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_box,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                )
+              : Container(),
+        ),
         child: Stack(
           children: [
             FadeInImage(

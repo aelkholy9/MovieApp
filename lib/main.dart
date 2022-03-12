@@ -50,8 +50,7 @@ class MyApp extends StatelessWidget {
 Future<bool> isUserLoggedIn() async {
   LoginController controller = Get.find();
   await controller.getUserBySession();
-  final userFound = controller.currentUser;
-  if (userFound?.id != null) {
+  if (controller.userExists()) {
     log('****** user FOUNDDD ***');
     return true;
   }
