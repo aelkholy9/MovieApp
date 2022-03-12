@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 Widget loginForm() {
-  Get.find();
+  final LoginController _loginController = Get.find();
   return GetBuilder<LoginController>(
     builder: ((controller) {
       return Form(
