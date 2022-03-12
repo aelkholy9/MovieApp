@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:movie_app/data/services/auth_service.dart';
+import 'package:movie_app/data/repos/auth_repo.dart';
 
 class LoginController extends GetxController {
   late TextEditingController userNameController;
@@ -37,8 +37,10 @@ class LoginController extends GetxController {
 
   Future login() async {
     if (formKey.currentState!.validate()) {
-      AuthenticationService ss = AuthenticationService();
-      await ss.createSession('5e6bc3596009aed4e94350e85947f9a835d102a6');
+      AuthenticationRepo authenticationRepo = AuthenticationRepo();
+      final data = await authenticationRepo.login(
+          userNameController.text, passwordController.text);
+      print(data);
     }
   }
 }
