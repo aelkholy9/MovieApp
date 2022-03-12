@@ -4,13 +4,19 @@ A simple flutter app related to TMDB movie database. The app includes some basic
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Funcionalities implemented: 
+-Login using userName and password.
+-Caching sessionId for automatic login.
+-Anonymous login.
+-Get now playing movies
+-Add movie to watch list
+-Remove movies from watch list
+-get watch list
+-Log out
 
-A few resources to get you started if this is your first Flutter project:
+Project is divided to 3 main layers:
+-Buisness logic (Controllers)
+-Data (models-services-repositories)
+-Presentation (screens-commonWidgets)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Statemanagement used: Getx 
