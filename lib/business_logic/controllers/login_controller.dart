@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/data/repos/auth_repo.dart';
 
+import '../../data/models/User.dart';
+
 class LoginController extends GetxController {
   late TextEditingController userNameController;
   late TextEditingController passwordController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final AuthenticationRepo authenticationRepo = AuthenticationRepo();
+  User? currentUser;
 
   @override
-  void onInit() {
+  void onInit() async {
     userNameController = TextEditingController();
     passwordController = TextEditingController();
     super.onInit();
@@ -37,9 +41,19 @@ class LoginController extends GetxController {
 
   Future<Map<String, dynamic>?> login() async {
     if (formKey.currentState!.validate()) {
-      AuthenticationRepo authenticationRepo = AuthenticationRepo();
-      return await authenticationRepo.login(
+      final loginStatus = await authenticationRepo.login(
           userNameController.text, passwordController.text);
+      await getUserBySession();
+      return loginStatus;
+    }
+    return null;
+  }
+
+  Future<User?> getUserBySession() async {
+    final userDataMap = await authenticationRepo.getUserBySessionId();
+    if (userDataMap != null) {
+      currentUser = User.fromJson(userDataMap);
+      update();
     }
     return null;
   }

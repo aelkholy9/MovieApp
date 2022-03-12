@@ -12,11 +12,35 @@ class MovieItem extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.red,
+      color: Colors.white,
       child: GridTile(
         child: FadeInImage(
           image: NetworkImage(ApiConstants.imagesUrl + movie.posterPath!),
-          placeholder: AssetImage('assets/images/tmdb.png'),
+          placeholder: const AssetImage('assets/images/loading.gif'),
+        ),
+        footer: Container(
+          height: 40,
+          color: Colors.black54,
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    movie.title!,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

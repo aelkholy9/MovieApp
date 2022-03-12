@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:movie_app/data/repos/movies_repo.dart';
-import 'package:movie_app/data/services/movie_service.dart';
-
 import '../../data/models/Movie.dart';
 
 class NowPlayingController extends GetxController {

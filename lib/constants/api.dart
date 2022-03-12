@@ -10,6 +10,8 @@ class ApiConstants {
   static const String imagesUrl = 'https://image.tmdb.org/t/p/w500';
   static const String nowPlayingMoviesUrl = 'movie/now_playing';
 
+  static const String getUserBySessionUrl = 'account';
+
   static Map<String, dynamic> constructParametersWithPageNumber(
       int pageNumber) {
     return {

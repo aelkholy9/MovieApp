@@ -9,7 +9,7 @@ class LocalStorage {
     await storage.write(key, value);
   }
 
-  static Future<String> get(String key, String value) async {
+  static Future<String> get(String key) async {
     GetStorage storage = GetStorage();
     return await storage.read(key);
   }
