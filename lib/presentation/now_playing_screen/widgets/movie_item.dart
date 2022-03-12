@@ -14,9 +14,28 @@ class MovieItem extends StatelessWidget {
       height: double.infinity,
       color: Colors.white,
       child: GridTile(
-        child: FadeInImage(
-          image: NetworkImage(ApiConstants.imagesUrl + movie.posterPath!),
-          placeholder: const AssetImage('assets/images/loading.gif'),
+        child: Stack(
+          children: [
+            FadeInImage(
+              image: NetworkImage(ApiConstants.imagesUrl + movie.posterPath!),
+              placeholder: const AssetImage('assets/images/loading.gif'),
+            ),
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Colors.black54,
+              padding: const EdgeInsets.all(15),
+              child: Center(
+                child: Text(
+                  movie.overview!,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Colors.white),
+                  maxLines: 5,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
         ),
         footer: Container(
           height: 40,
