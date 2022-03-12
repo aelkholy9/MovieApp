@@ -4,7 +4,13 @@ A simple flutter app related to TMDB movie database. The app includes some basic
 
 ## Getting Started
 
+Home Page:
 ![alt text](https://i.imgur.com/3elIWky.png)
+
+
+Login Screen:
+![alt text](https://i.imgur.com/0aRdHl7.png)
+
 
 
 Funcionalities implemented: 
