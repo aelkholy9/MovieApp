@@ -23,6 +23,7 @@ class MovieItem extends StatelessWidget {
           height: 30,
           child: _loginController.userExists()
               ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                       icon: const Icon(
@@ -43,7 +44,27 @@ class MovieItem extends StatelessWidget {
                           Get.snackbar("failure", "Movie not added");
                         }
                       },
-                    )
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.cancel,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      onPressed: () async {
+                        Get.dialog(
+                            const LoadingDialog(dialogText: 'removing movie'));
+                        final success = await _watchListController
+                            .removeMovieFromList(movie: movie);
+                        Get.back();
+                        if (success) {
+                          Get.snackbar("Success", "Movie removed from list",
+                              colorText: Colors.white);
+                        } else {
+                          Get.snackbar("failure", "Movie not added");
+                        }
+                      },
+                    ),
                   ],
                 )
               : Container(),

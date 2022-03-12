@@ -44,4 +44,25 @@ class WatchListService {
     return null;
   }
 
+  Future<Response?> removeMovieFromList(
+      {required int userId,
+      required String sessionId,
+      required int mediaId}) async {
+    try {
+      final queryParameters = {
+        ApiParameters.apiKey: ApiConstants.apiKey,
+        ApiParameters.sessionId: sessionId,
+      };
+      final body = {
+        "media_type": "movie",
+        "media_id": mediaId,
+        "watchlist": false
+      };
+      return await _apiHelper.post(
+          ApiConstants.addToWatchListUrl(userId), body, queryParameters);
+    } catch (error) {
+      log('error: $error');
+    }
+    return null;
+  }
 }

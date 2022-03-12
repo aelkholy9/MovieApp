@@ -35,4 +35,18 @@ class WatchListRepository {
       return {};
     }
   }
+
+  Future<Map<String, dynamic>> removeMovieFromList(int mediaId) async {
+    try {
+      final sessionId = await LocalStorage.get(ApiParameters.sessionId);
+      final dataMap = await _watchListService.removeMovieFromList(
+          mediaId: mediaId,
+          sessionId: sessionId,
+          userId: loginController.getUser!.id!);
+      return dataMap?.data;
+    } catch (e) {
+      log('error in remove watch list repo: $e');
+      return {};
+    }
+  }
 }

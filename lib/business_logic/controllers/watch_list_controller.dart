@@ -31,4 +31,16 @@ class WatchListController extends GetxController {
     }
     return false;
   }
+
+  Future<bool> removeMovieFromList({required Movie movie}) async {
+    final addMovieDataMap =
+        await _watchListRepository.removeMovieFromList(movie.id!);
+    if (addMovieDataMap[ApiParameters.success]) {
+      watchList.removeWhere((currentMovie) => currentMovie.id == movie.id);
+      loadingMovies = false;
+      update();
+      return true;
+    }
+    return false;
+  }
 }
