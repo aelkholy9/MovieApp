@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:movie_app/business_logic/controllers/login_controller.dart';
 import 'package:movie_app/constants/api.dart';
 import 'package:movie_app/constants/colors.dart';
+import 'package:movie_app/constants/screens_names.dart';
 import 'package:movie_app/presentation/common_widgets/loading_dialog.dart';
 import 'package:movie_app/presentation/common_widgets/rounded_button.dart';
 import 'package:movie_app/presentation/common_widgets/rounded_text_field.dart';
@@ -80,7 +81,7 @@ Widget loginForm() {
 
 void handleLoginStatus(Map<String, dynamic>? loginStatus) {
   if (loginStatus?[ApiParameters.success]) {
-    print('success');
+    Get.offNamed(Screens.nowPlayingScreen);
   } else {
     showLoginErrorDialog(loginStatus);
   }
