@@ -24,28 +24,26 @@ class MovieItem extends StatelessWidget {
           child: _loginController.userExists()
               ? Row(
                   children: [
-                    !_watchListController.watchList.contains(movie)
-                        ? IconButton(
-                            icon: const Icon(
-                              Icons.add_box,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            onPressed: () async {
-                              Get.dialog(const LoadingDialog(
-                                  dialogText: 'Adding movie'));
-                              final success = await _watchListController
-                                  .addMovieToWatchList(movie: movie);
-                              Get.back();
-                              if (success) {
-                                Get.snackbar("Success", "Movie added to list",
-                                    colorText: Colors.white);
-                              } else {
-                                Get.snackbar("failure", "Movie not added");
-                              }
-                            },
-                          )
-                        : Container(),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.add_box,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      onPressed: () async {
+                        Get.dialog(
+                            const LoadingDialog(dialogText: 'Adding movie'));
+                        final success = await _watchListController
+                            .addMovieToWatchList(movie: movie);
+                        Get.back();
+                        if (success) {
+                          Get.snackbar("Success", "Movie added to list",
+                              colorText: Colors.white);
+                        } else {
+                          Get.snackbar("failure", "Movie not added");
+                        }
+                      },
+                    )
                   ],
                 )
               : Container(),

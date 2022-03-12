@@ -14,8 +14,8 @@ class LocalStorage {
     return await storage.read(key);
   }
 
-  static void clear() {
+  static void clear() async {
     GetStorage storage = GetStorage();
-    storage.erase();
+    await storage.erase();
   }
 }

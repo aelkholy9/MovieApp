@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/data/repos/auth_repo.dart';
@@ -6,9 +8,9 @@ import '../../data/models/User.dart';
 import '../../utils/storage.dart';
 
 class LoginController extends GetxController {
-  late TextEditingController userNameController;
-  late TextEditingController passwordController;
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late final TextEditingController userNameController;
+  late final TextEditingController passwordController;
+  late final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final AuthenticationRepo authenticationRepo = AuthenticationRepo();
   User? _currentUser;
 
@@ -23,6 +25,7 @@ class LoginController extends GetxController {
   void onClose() {
     userNameController.dispose();
     passwordController.dispose();
+    formKey.currentState?.deactivate();
     super.onClose();
   }
 
@@ -45,6 +48,8 @@ class LoginController extends GetxController {
       final loginStatus = await authenticationRepo.login(
           userNameController.text, passwordController.text);
       await getUserBySession();
+      clearControllers();
+      update();
       return loginStatus;
     }
     return null;
@@ -60,12 +65,26 @@ class LoginController extends GetxController {
   }
 
   bool userExists() {
-    return _currentUser != null;
+    log('userExist: ${_currentUser?.id}');
+    return _currentUser?.id != null;
   }
 
   User? get getUser => _currentUser;
 
-  void signOut() {
-    LocalStorage.clear();
+  void signOut() async {
+    try {
+      LocalStorage.clear();
+      _currentUser?.id = null;
+      _currentUser = null;
+      update();
+    } catch (e) {
+      log('logging out: $e');
+    }
+  }
+
+  void clearControllers() {
+    userNameController.clear();
+    passwordController.clear();
+    update();
   }
 }

@@ -33,17 +33,17 @@ class MyApp extends StatelessWidget {
       ),
       getPages: [
         GetPage(
-          name: Screens.nowPlayingScreen,
-          page: () => NowPlayingScreen(),
-        ),
+            name: Screens.nowPlayingScreen,
+            page: () => NowPlayingScreen(),
+            binding: AppBinding()),
         GetPage(
           name: Screens.watchListScreen,
           page: () => const WatchListScreen(),
         ),
         GetPage(
-          name: Screens.loginScreen,
-          page: () => LoginScreen(),
-        ),
+            name: Screens.loginScreen,
+            page: () => LoginScreen(),
+            binding: AppBinding()),
       ],
       initialBinding: AppBinding(),
     );

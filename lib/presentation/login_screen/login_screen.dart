@@ -69,7 +69,9 @@ Widget loginForm() {
               title: "Login",
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.offNamed(Screens.nowPlayingScreen);
+              },
               child: const Text('Continue Anonymously?'),
             )
           ],

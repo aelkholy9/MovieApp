@@ -9,8 +9,8 @@ import 'package:movie_app/presentation/now_playing_screen/widgets/movie_item.dar
 import '../../constants/screens_names.dart';
 
 class NowPlayingScreen extends StatelessWidget {
-   NowPlayingScreen({Key? key}) : super(key: key);
-  final LoginController _loginController = LoginController();
+  NowPlayingScreen({Key? key}) : super(key: key);
+  final LoginController _loginController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,19 +18,25 @@ class NowPlayingScreen extends StatelessWidget {
         title: const Text("Now playing"),
         backgroundColor: AppColors.primaryColor,
         actions: [
-          IconButton(
-            onPressed: () {
-              Get.toNamed(Screens.watchListScreen);
-            },
-            icon: const Icon(
-              Icons.lock_clock,
-              color: Colors.white,
-            ),
-          ),
+          _loginController.userExists() == true
+              ? IconButton(
+                  onPressed: () {
+                    Get.toNamed(
+                      Screens.watchListScreen,
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.lock_clock,
+                    color: Colors.white,
+                  ),
+                )
+              : Container(),
           IconButton(
             onPressed: () {
               _loginController.signOut();
-              Get.offNamed(Screens.loginScreen);
+              Get.offNamed(
+                Screens.loginScreen,
+              );
             },
             icon: const Icon(
               Icons.exit_to_app,
