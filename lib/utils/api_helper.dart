@@ -21,11 +21,11 @@ class ApiHelper {
     );
   }
 
-  Future<Response?> get(String url) async {
+  Future<Response?> get(String url,
+      [queryParameter = const {'api_key': ApiConstants.apiKey}]) async {
     Response? response;
     try {
-      response =
-          await dio.get(url, queryParameters: {'api_key': ApiConstants.apiKey});
+      response = await dio.get(url, queryParameters: queryParameter);
       log("request Token: ${response.data}");
       return response;
     } catch (error) {
@@ -33,6 +33,19 @@ class ApiHelper {
       return response;
     }
   }
+  //
+  // Future<Response?> getWithCustomParameters(String url, Map<String, dynamic>) async {
+  //   Response? response;
+  //   try {
+  //     response =
+  //     await dio.get(url, queryParameters: {'api_key': ApiConstants.apiKey});
+  //     log("request Token: ${response.data}");
+  //     return response;
+  //   } catch (error) {
+  //     log('error: $error');
+  //     return response;
+  //   }
+  // }
 
   Future<Response?> post(String url, Map<String, dynamic> body) async {
     Response? response;

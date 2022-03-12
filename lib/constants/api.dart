@@ -7,6 +7,16 @@ class ApiConstants {
   static const String validateTokenUrl =
       'authentication/token/validate_with_login';
   static const String createSessionUrl = 'authentication/session/new';
+  static const String imagesUrl = 'https://image.tmdb.org/t/p/w500';
+  static const String nowPlayingMoviesUrl = 'movie/now_playing';
+
+  static Map<String, dynamic> constructParametersWithPageNumber(
+      int pageNumber) {
+    return {
+      ApiParameters.apiKey: ApiConstants.apiKey,
+      ApiParameters.page: pageNumber,
+    };
+  }
 
   static const plainHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
@@ -24,4 +34,6 @@ class ApiParameters {
   static const sessionId = 'session_id';
   static const statusMsg = 'status_message';
   static const success = 'success';
+  static const apiKey = 'api_key';
+  static const page = 'page';
 }
