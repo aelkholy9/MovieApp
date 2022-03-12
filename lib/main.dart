@@ -26,9 +26,7 @@ class MyApp extends StatelessWidget {
         future: isUserLoggedIn(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return snapshot.data == true
-                ? const NowPlayingScreen()
-                : LoginScreen();
+            return snapshot.data == true ? NowPlayingScreen() : LoginScreen();
           }
           return const LoadingDialog(dialogText: "Loading");
         },
@@ -36,11 +34,15 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: Screens.nowPlayingScreen,
-          page: () => const NowPlayingScreen(),
+          page: () => NowPlayingScreen(),
         ),
         GetPage(
           name: Screens.watchListScreen,
           page: () => const WatchListScreen(),
+        ),
+        GetPage(
+          name: Screens.loginScreen,
+          page: () => LoginScreen(),
         ),
       ],
       initialBinding: AppBinding(),

@@ -13,4 +13,9 @@ class LocalStorage {
     GetStorage storage = GetStorage();
     return await storage.read(key);
   }
+
+  static void clear() {
+    GetStorage storage = GetStorage();
+    storage.erase();
+  }
 }

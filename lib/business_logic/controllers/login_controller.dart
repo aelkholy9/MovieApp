@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:movie_app/data/repos/auth_repo.dart';
 
 import '../../data/models/User.dart';
+import '../../utils/storage.dart';
 
 class LoginController extends GetxController {
   late TextEditingController userNameController;
@@ -63,4 +64,8 @@ class LoginController extends GetxController {
   }
 
   User? get getUser => _currentUser;
+
+  void signOut() {
+    LocalStorage.clear();
+  }
 }

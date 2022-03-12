@@ -44,11 +44,15 @@ class AuthenticationRepo {
 
   Future<Map<String, dynamic>?> getUserBySessionId() async {
     log("**** geting user by session id repo");
-    final sessionId = await LocalStorage.get(ApiParameters.sessionId);
-    if (sessionId.isNotEmpty) {
-      final dataMap = await _authenticationService.getUserBySession(sessionId);
-      return dataMap?.data;
-    }
+    try {
+      final sessionId = await LocalStorage.get(ApiParameters.sessionId);
+      if (sessionId.isNotEmpty) {
+        final dataMap =
+            await _authenticationService.getUserBySession(sessionId);
+        return dataMap?.data;
+      }
+    } catch (e) {}
+
     return null;
   }
 }
