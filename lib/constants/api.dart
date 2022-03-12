@@ -21,4 +21,7 @@ class ApiParameters {
   static const userName = 'username';
   static const password = 'password';
   static const requestToken = 'request_token';
+  static const sessionId = 'session_id';
+  static const statusMsg = 'status_message';
+  static const success = 'success';
 }

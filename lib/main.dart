@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:movie_app/presentation/login_screen/login_screen.dart';
 import 'package:movie_app/utils/app_binding.dart';
 
 void main() {
+  GetStorage.init();
   runApp(const MyApp());
 }
 

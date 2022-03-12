@@ -35,12 +35,12 @@ class LoginController extends GetxController {
     return null;
   }
 
-  Future login() async {
+  Future<Map<String, dynamic>?> login() async {
     if (formKey.currentState!.validate()) {
       AuthenticationRepo authenticationRepo = AuthenticationRepo();
-      final data = await authenticationRepo.login(
+      return await authenticationRepo.login(
           userNameController.text, passwordController.text);
-      print(data);
     }
+    return null;
   }
 }
