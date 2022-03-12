@@ -25,17 +25,19 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
         future: isUserLoggedIn(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return snapshot.data == true ? NowPlayingScreen() : LoginScreen();
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              !snapshot.hasData) {
+            return const LoadingDialog(dialogText: "Loading");
           }
-          return const LoadingDialog(dialogText: "Loading");
+          return snapshot.data == true ? NowPlayingScreen() : LoginScreen();
         },
       ),
       getPages: [
         GetPage(
-            name: Screens.nowPlayingScreen,
-            page: () => NowPlayingScreen(),
-            binding: AppBinding()),
+          name: Screens.nowPlayingScreen,
+          page: () => NowPlayingScreen(),
+          binding: AppBinding(),
+        ),
         GetPage(
           name: Screens.watchListScreen,
           page: () => const WatchListScreen(),
@@ -51,8 +53,11 @@ class MyApp extends StatelessWidget {
 }
 
 Future<bool> isUserLoggedIn() async {
-  LoginController controller = Get.find();
+  log('get user sessino ***');
+  final LoginController controller = Get.find();
   await controller.getUserBySession();
+  log('get user after sessino ***');
+
   if (controller.userExists()) {
     log('****** user FOUNDDD ***');
     return true;

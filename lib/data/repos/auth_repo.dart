@@ -51,7 +51,9 @@ class AuthenticationRepo {
             await _authenticationService.getUserBySession(sessionId);
         return dataMap?.data;
       }
-    } catch (e) {}
+    } catch (e) {
+      return null;
+    }
 
     return null;
   }

@@ -16,8 +16,10 @@ class LoginController extends GetxController {
 
   @override
   void onInit() async {
+    log('init login control ****');
     userNameController = TextEditingController();
     passwordController = TextEditingController();
+    await getUserBySession();
     super.onInit();
   }
 
@@ -56,10 +58,14 @@ class LoginController extends GetxController {
   }
 
   Future<User?> getUserBySession() async {
-    final userDataMap = await authenticationRepo.getUserBySessionId();
-    if (userDataMap != null) {
-      _currentUser = User.fromJson(userDataMap);
-      update();
+    try {
+      final userDataMap = await authenticationRepo.getUserBySessionId();
+      if (userDataMap != null) {
+        _currentUser = User.fromJson(userDataMap);
+        update();
+      }
+    } catch (e) {
+      log("$e");
     }
     return null;
   }

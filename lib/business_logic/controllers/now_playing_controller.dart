@@ -21,7 +21,8 @@ class NowPlayingController extends GetxController {
 
   Future<void> getMovies() async {
     final List moviesDataList = await _movieRepository.getMovies();
-    movies = moviesDataList.map((movie) => Movie.fromJson(movie)).toList();
+    movies =
+        movies + moviesDataList.map((movie) => Movie.fromJson(movie)).toList();
     update();
   }
 }
